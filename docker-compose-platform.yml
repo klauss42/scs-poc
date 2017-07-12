@@ -20,8 +20,8 @@ services:
       - "9200:9200"
       - "5000:5000"
       - "5044:5044"
-    volumes:
-      - ./data/elasticsearch:/var/lib/elasticsearch
+#    volumes:
+#      - ./data/elasticsearch:/var/lib/elasticsearch
     networks:
       - scs
 
@@ -34,21 +34,21 @@ services:
     networks:
       - scs
 
-  grafana:
-    image: klauss42/scs-poc-grafana
-    container_name: grafana
-    ports:
-      - '9080:80'
-      - '9081:81'
-      - '8125:8125/udp'
-      - '8126:8126'
-      - '2003:2003'
-    volumes:
-      - ./data/whisper:/opt/graphite/storage/whisper
-      - ./data/grafana:/opt/grafana/data
-      - ./log/graphite:/opt/graphite/storage/log
-    networks:
-      - scs
+#  grafana:
+#    image: klauss42/scs-poc-grafana
+#    container_name: grafana
+#    ports:
+#      - '9080:80'
+#      - '9081:81'
+#      - '8125:8125/udp'
+#      - '8126:8126'
+#      - '2003:2003'
+#    volumes:
+#      - ./data/whisper:/opt/graphite/storage/whisper
+#      - ./data/grafana:/opt/grafana/data
+#      - ./log/graphite:/opt/graphite/storage/log
+#    networks:
+#      - scs
 
   consul1:
     image: "progrium/consul:latest"
