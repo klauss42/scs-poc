@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Connect - Page 2</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<div th:remove="tag" th:utext="${navigationNavbar}"></div>
+<div th:replace="index :: connectNavbar('page2')"></div>
+
+<img src="/" th:src="@{${signalImgUrl}}" width="0" height="0" />
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Connect UI</h1>
+        <h2>Page 2</h2>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+            aliquyam</p>
+    </div>
+</div>
+
+</body>
+</html>

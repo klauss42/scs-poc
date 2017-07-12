@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.demo.scs.poc</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <artifactId>shop-ui</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>SCS PoC :: Shop :: UI Application</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <!-- optional: you don't really need execution ids, but it looks nice in your build log. -->
+                        <id>install node</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v6.9.1</nodeVersion>
+                        </configuration>
+                    </execution>
+
+
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>.</directory>
+                            <includes>
+                                <include>build/**</include>
+                                <!--<include>node_modules/**</include>-->
+                                <include>node/**</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>io.fabric8</groupId>
+                            <artifactId>docker-maven-plugin</artifactId>
+                            <configuration combine.self="override">
+                                <logDate>default</logDate>
+                                <autoPull>true</autoPull>
+                                <!--<dockerHost>${docker.host}</dockerHost>-->
+                                <verbose>true</verbose>
+                                <useColor>true</useColor>
+                                <images>
+                                    <image>
+                                        <!-- Alias name which can used for linking containers during runtime -->
+                                        <alias>${project.artifactId}</alias>
+                                        <name>
+                                            ${docker.image.registry}${docker.image.prefix}${project.artifactId}:${project.version}
+                                        </name>
+                                        <build>
+                                            <tags>
+                                                <tag>latest</tag>
+                                                <tag>${project.version}</tag>
+                                            </tags>
+                                            <cleanup>false</cleanup>
+                                            <dockerFileDir>${project.basedir}/docker</dockerFileDir>
+                                            <assembly>
+                                                <inline>
+                                                    <id>${project.artifactId}</id>
+                                                    <fileSets>
+                                                        <fileSet>
+                                                            <directory>${project.basedir}/build</directory>
+                                                            <outputDirectory>build/</outputDirectory>
+                                                        </fileSet>
+                                                    </fileSets>
+                                                </inline>
+                                                <!--<descriptor>${project.basedir}/docker/assembly.xml</descriptor>-->
+                                            </assembly>
+                                        </build>
+                                    </image>
+                                </images>
+                            </configuration>
+
+                            <!-- Hooking into the lifecycle -->
+                            <executions>
+                                <execution>
+                                    <id>build</id>
+                                    <goals>
+                                        <goal>build</goal>
+                                    </goals>
+                                    <phase>install</phase>
+                                </execution>
+                                <execution>
+                                    <id>push-deploy</id>
+                                    <goals>
+                                        <goal>push</goal>
+                                    </goals>
+                                    <phase>deploy</phase>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+</project>

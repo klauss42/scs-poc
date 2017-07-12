@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.demo.scs.poc.shared.metrics.MetricsConfigProdEnvironment,\
+com.demo.scs.poc.shared.metrics.MetricsConfigTestEnvironment

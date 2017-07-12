@@ -1,0 +1,10 @@
+
+  :: Spring Boot   :: ${spring-boot.version}
+  :: Application   :: ${application.version}
+
+  :: Build-Time    :: @maven-build-timestamp@
+
+  :: Git Timestamp :: @git.commit.time@
+  :: Git Hash      :: @git.commit.id.abbrev@
+  :: Git Message   :: @git.commit.message.short@
+  :: Git Branch    :: @git.branch@

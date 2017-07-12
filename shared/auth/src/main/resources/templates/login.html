@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+
+    <title>scs - Login</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		  th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+			th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <span class="navbar-brand">scs</span>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="col-sm-offset-2">scs - Login</h2>
+    <div class="form-group">
+        &nbsp;
+    </div>
+
+    <div th:if="${param.logout}" class="col-sm-offset-2">
+        <label class="info" th:text="#{login.loggedout}">You have been logged out.</label>
+    </div>
+
+    <form class="form-horizontal" action="login" th:action="@{/login}" method="post">
+        <!-- csrf_token hidden input field will be injected by thymeleaf if form is processed with th:ation -->
+        <div class="form-group" th:classappend="${param.error} ? 'has-error'">
+            <label class="control-label col-sm-2" for="username" th:text="#{login.username.label}">Username:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" th:placeholder="#{login.username.placeholder}">
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="form-group" th:classappend="${param.error} ? 'has-error'">
+            <label class="control-label col-sm-2" for="password" th:text="#{login.password.label}">Password:</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" th:placeholder="#{login.password.placeholder}">
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" th:text="#{login.submit.label}">Login</button>
+            </div>
+        </div>
+    </form>
+
+    <div th:if="${param.error}" class="col-sm-offset-2">
+        <label class="error" th:text="#{login.invalid}">Invalid username or password.</label>
+    </div>
+</div>
+
+</body>
+</html>

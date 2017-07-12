@@ -1,0 +1,133 @@
+version: '2'
+
+networks:
+  scs:
+    external: true
+
+services:
+
+  auth:
+    image: klauss42/scs-poc-shared-auth
+    ports:
+      - "8888:8888"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  gateway:
+    image: klauss42/scs-poc-platform-gateway
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  shared-framing:
+    image: klauss42/scs-poc-shared-framing
+    ports:
+      - "9006"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  connect-ui:
+    image: klauss42/scs-poc-connect-ui
+    ports:
+      - "9001"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  connect-service1:
+    image: klauss42/scs-poc-connect-service1
+    ports:
+      - "9002"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  vehicle-ui:
+    image: klauss42/scs-poc-vehicle-ui
+    ports:
+      - "9003"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  vehicle-service1:
+    image: klauss42/scs-poc-vehicle-service1
+    ports:
+      - "9004"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+#  shop-ui:
+#    image: klauss42/scs-poc-shop-ui
+#    ports:
+#      - "9005:80"
+#    env_file:
+#      - ./common.env
+#    networks:
+#      - scs
+
+  profile-ui:
+    image: klauss42/scs-poc-profile-ui
+    ports:
+      - "9008"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  profile-service1:
+    image: klauss42/scs-poc-profile-service1
+    ports:
+      - "9009"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  home-ui:
+    image: klauss42/scs-poc-home-ui
+    ports:
+      - "9010"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  home-service1:
+    image: klauss42/scs-poc-home-service1
+    ports:
+      - "9011"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  home-beats-renderer-service:
+    image: klauss42/scs-poc-home-beats-render-service
+    ports:
+      - "9012"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  user-context:
+    image: klauss42/scs-poc-shared-user-context
+    ports:
+      - "9007"
+    env_file:
+      - ./common.env
+    networks:
+      - scs

@@ -1,0 +1,81 @@
+version: '2'
+
+networks:
+  scs:
+    external: true
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - scs
+
+  elk:
+    image: klauss42/scs-poc-elk
+    container_name: elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5000:5000"
+      - "5044:5044"
+    volumes:
+      - ./data/elasticsearch:/var/lib/elasticsearch
+    networks:
+      - scs
+
+  zipkin:
+    image: klauss42/scs-poc-platform-zipkin
+    ports:
+      - "9411:9411"
+    env_file:
+      - ./common.env
+    networks:
+      - scs
+
+  grafana:
+    image: klauss42/scs-poc-grafana
+    container_name: grafana
+    ports:
+      - '9080:80'
+      - '9081:81'
+      - '8125:8125/udp'
+      - '8126:8126'
+      - '2003:2003'
+    volumes:
+      - ./data/whisper:/opt/graphite/storage/whisper
+      - ./data/grafana:/opt/grafana/data
+      - ./log/graphite:/opt/graphite/storage/log
+    networks:
+      - scs
+
+  consul1:
+    image: "progrium/consul:latest"
+    container_name: "scspoc_consul1"
+    hostname: "scspoc_consul1"
+    ports:
+      - "8300:8300"
+      - "8301:8301"
+      - "8302:8302"
+      - "8400:8400"  # rpc/rest
+      - "8500:8500"  # ui
+      - "8600:53/udp"   # dns
+    command: "-server -bootstrap-expect 2 -ui-dir /ui"
+    networks:
+      - scs
+
+  consul2:
+    image: "progrium/consul:latest"
+    container_name: "scspoc_consul2"
+    hostname: "scspoc_consul2"
+    expose:
+      - "8400"
+      - "8500"
+      - "8600"
+    command: "-server -join scspoc_consul1"
+    depends_on:
+      - consul1
+    networks:
+      - scs
+

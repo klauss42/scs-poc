@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Connect - Index</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<div th:remove="tag" th:utext="${navigationNavbar}"></div>
+<div class="container" th:fragment="connectNavbar(current)">
+    <ul class="nav nav-tabs">
+        <li th:classappend="${current == 'index'} ? 'active'"><a href="#" th:href="@{/}">Index</a></li>
+        <li th:classappend="${current == 'page1'} ? 'active'"><a href="#" th:href="@{/page1}">Page 1</a></li>
+        <li th:classappend="${current == 'page2'} ? 'active'"><a href="#" th:href="@{/page2}">Page 2</a></li>
+        <li th:classappend="${current == 'page3'} ? 'active'"><a href="#" th:href="@{/page3}">Page 3</a></li>
+    </ul>
+</div>
+
+<img src="/" th:src="@{${signalImgUrl}}" width="0" height="0" />
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Connect UI</h1>
+        <h2>Index</h2>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+            aliquyam</p>
+    </div>
+    <p>This is some text.</p>
+    <p>This is another text.</p>
+</div>
+</body>
+</html>

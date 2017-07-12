@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: home-ui
+  main:
+    banner_mode: "off"
+  cloud:
+    consul:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+  zipkin:
+    enabled: false
+
+# disable security for management endpoints like /health
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+    ROOT: WARN
+
+scspoc:
+  ps-engine:
+    # dummy url to get the Spring app context loaded
+    url: http://localhost:1111/ps-engine
+  ps-signaltracker:
+    url: http://localhost:1234/signaltracker

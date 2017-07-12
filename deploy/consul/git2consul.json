@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "repos" : [{
+    "include_branch_name" : false,
+    "expand_keys" : false,
+    "name" : "scs-poc-config",
+    "url" : "git@git.sinnerschrader.com:AUD/scs-poc-config.git",
+    "source_root": "scs-poc-config",
+    "ignore_file_extension" : true,
+    "branches" : ["master"],
+    "no_daemon": true
+  }]
+}

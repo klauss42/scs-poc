@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: connect-ui
+  main:
+    banner_mode: "off"
+  cloud:
+    consul:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+  zipkin:
+    enabled: false
+
+# disable security for management endpoints like /health
+management:
+  security:
+    enabled: false
+logging:
+  level:
+    ROOT: WARN
+
+scspoc:
+  ps-signaltracker:
+    url: http://localhost:1234/signaltracker

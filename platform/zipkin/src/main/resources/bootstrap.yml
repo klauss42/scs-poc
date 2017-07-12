@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: platform-zipkin
+  cloud:
+    consul:
+      host: ${CONFIG_SERVER_HOST:localhost}
+      port: 8500
+      config:
+        prefix: scs-poc-config
+        fail-fast: true
+        format: YAML
+        # decrease watch timing, see https://github.com/spring-cloud/spring-cloud-consul/issues/240
+        watch:
+          wait-time: 55
+      discovery:
+        healthCheckPath: /health
+        healthCheckInterval: 15s
+
+server:
+  port: 9411

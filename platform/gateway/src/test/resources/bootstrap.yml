@@ -1,0 +1,9 @@
+spring:
+  main:
+    banner_mode: "off"
+  cloud:
+    consul:
+      discovery:
+        enabled: false
+      config:
+        enabled: false

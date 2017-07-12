@@ -1,0 +1,23 @@
+server:
+  contextPath: /uaa
+
+security:
+  user:
+    password: password
+#  ignored: /css/**,/js/**,/favicon.ico,/webjars/**
+
+logging:
+  level:
+    ROOT: WARN
+#    org.springframework: INFO
+#    org.springframework.security: DEBUG
+
+spring:
+  main:
+    banner_mode: "off"
+  cloud:
+    consul:
+      discovery:
+        enabled: false
+      config:
+        enabled: false

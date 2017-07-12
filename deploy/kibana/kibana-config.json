@@ -1,0 +1,57 @@
+[
+  {
+    "_id": "Default",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Default",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"Java-logs\",\"panelIndex\":1,\"row\":1,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"columns\":[\"beat.name\",\"loglevel\",\"logmessage\",\"classname\"],\"id\":\"Java-Logs\",\"panelIndex\":2,\"row\":4,\"size_x\":12,\"size_y\":6,\"sort\":[\"@timestamp\",\"desc\"],\"type\":\"search\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{\"P-1\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "Java-Logs",
+    "_type": "search",
+    "_source": {
+      "title": "Java Logs",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "beat.name",
+        "beat.hostname",
+        "loglevel",
+        "logmessage"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"logstash-*\",\"key\":\"loglevel\",\"negate\":false,\"value\":\"ERROR\"},\"query\":{\"match\":{\"loglevel\":{\"query\":\"ERROR\",\"type\":\"phrase\"}}}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"logmessage\",\"value\":\"Tomcat started on port\",\"disabled\":true,\"alias\":null},\"query\":{\"match\":{\"logmessage\":{\"query\":\"Tomcat started on port\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "Java-logs",
+    "_type": "visualization",
+    "_source": {
+      "title": "Java logs",
+      "visState": "{\"title\":\"Java logs\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"loglevel\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"info\":\"#629E51\",\"warn\":\"#EAB839\",\"debug\":\"#447EBC\"}}}",
+      "description": "",
+      "savedSearchId": "Java-Logs",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  }
+]

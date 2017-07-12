@@ -1,0 +1,8 @@
+service1:
+  image: klauss42/scs-poc-connect-service1
+  ports:
+    - "9001"
+  environment:
+    - ENABLE_FILEBEAT=false
+    - LOGSTASH_HOST=elk
+    - LOGSTASH_PORT=5044

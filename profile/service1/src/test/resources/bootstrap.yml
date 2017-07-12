@@ -1,0 +1,22 @@
+spring:
+  main:
+    banner_mode: "off"
+  cloud:
+    consul:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+  zipkin:
+    enabled: false
+
+# disable security for management endpoints like /health
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+    ROOT: WARN
+#    org.springframework: INFO
+

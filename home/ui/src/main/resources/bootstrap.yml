@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: home-ui
+  thymeleaf:
+    mode: HTML
+#    cache: false
+    templateResolverOrder: 10
+  cloud:
+    consul:
+      host: ${CONFIG_SERVER_HOST:localhost}
+      port: 8500
+      config:
+        prefix: scs-poc-config
+        fail-fast: true
+        format: YAML
+        # decrease watch timing, see https://github.com/spring-cloud/spring-cloud-consul/issues/240
+        watch:
+          wait-time: 55
+      discovery:
+        healthCheckPath: ${server.context-path}/health
+        healthCheckInterval: 15s
+
+#logging:
+#  level:
+#    org.thymeleaf: TRACE
+#    org.springframework.boot: TRACE
